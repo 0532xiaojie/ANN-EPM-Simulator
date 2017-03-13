@@ -2,16 +2,13 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.53817794 -0.72261014 -0.43381919 4.5884175
-  position 1.8702032 5.1515827 2.1113126
+  orientation -0.01163565 -0.78702746 -0.61680823 3.1013764
+  position 0.39712794 2.29078 -0.098139103
 }
 E-puck {
-  hidden translation_1 -0.026000096 0.020001307 -3.581043e-08
-  hidden rotation_1 0.99999961 5.5663248e-05 0.00088464537 0.14623632
-  hidden translation_2 0.026000072 0.020001165 4.0004632e-08
-  hidden rotation_2 0.99999981 3.5389932e-05 0.00062186136 0.19450627
-  translation -0.90988917 1.0625514 1.9665495
-  rotation 0.13330317 0.99107499 0.00079935473 -0.018943839
+  translation 0.7 1.01 0
+  rotation 0 1 0 1.5707963
+  controller "NNGA-Controller"
 }
 DirectionalLight {
   ambientIntensity 1
@@ -20,7 +17,7 @@ DirectionalLight {
   castShadows TRUE
 }
 DEF OPEN_ARM_FLOOR_2 Solid {
-  translation -0.1800004 1.0099996 1.5
+  translation 0 1 -0.475
   rotation 0.57735027 -0.57735027 0.57735027 2.0944
   children [
     Shape {
@@ -41,7 +38,7 @@ DEF OPEN_ARM_FLOOR_2 Solid {
   }
 }
 DEF OPEN_ARM_FLOOR_1 Solid {
-  translation -0.1799996 1.0100004 2.44
+  translation 0 1 0.475
   rotation 0.57735027 -0.57735027 0.57735027 2.0944
   children [
     Shape {
@@ -61,8 +58,8 @@ DEF OPEN_ARM_FLOOR_1 Solid {
     }
   }
 }
-DEF MAIN_FLOOR Solid {
-  translation -0.18 1 1.97
+DEF MAIN_FLOOR Charger {
+  translation 0 1 0
   rotation 1 1.22461e-16 1.22461e-16 4.71239
   children [
     Shape {
@@ -71,6 +68,7 @@ DEF MAIN_FLOOR Solid {
       }
     }
   ]
+  name "solid"
   boundingObject Shape {
     geometry Box {
       size 1.6 0.15 0.025
@@ -78,7 +76,7 @@ DEF MAIN_FLOOR Solid {
   }
 }
 DEF WALL6 Solid {
-  translation -0.98 1.0600007 1.9699978
+  translation -0.8075 1.0625 0
   rotation 0.57735094 0.57735094 0.57734894 2.0944
   children [
     Shape {
@@ -88,7 +86,7 @@ DEF WALL6 Solid {
         }
       }
       geometry Box {
-        size 0.15 0.15 0.015
+        size 0.15 0.18 0.015
       }
     }
   ]
@@ -99,7 +97,7 @@ DEF WALL6 Solid {
   }
 }
 DEF WALL5 Solid {
-  translation 0.62 1.0599993 1.9699923
+  translation 0.8075 1.0625 0
   rotation 0.57735094 0.57735094 0.57734894 2.0944
   children [
     Shape {
@@ -109,7 +107,7 @@ DEF WALL5 Solid {
         }
       }
       geometry Box {
-        size 0.15 0.15 0.015
+        size 0.15 0.18 0.015
       }
     }
   ]
@@ -120,7 +118,7 @@ DEF WALL5 Solid {
   }
 }
 DEF WALL4 Solid {
-  translation -0.61 1.06 1.89
+  translation 0.43 1.0625 -0.0825
   children [
     Shape {
       appearance Appearance {
@@ -140,7 +138,7 @@ DEF WALL4 Solid {
   }
 }
 DEF WALL3 Solid {
-  translation 0.25 1.06 2.05
+  translation -0.43 1.0625 -0.0825
   children [
     Shape {
       appearance Appearance {
@@ -160,7 +158,7 @@ DEF WALL3 Solid {
   }
 }
 DEF WALL2 Solid {
-  translation 0.25 1.06 1.89
+  translation 0.43 1.0625 0.0825
   children [
     Shape {
       appearance Appearance {
@@ -178,7 +176,7 @@ DEF WALL2 Solid {
   }
 }
 DEF WALL1 Solid {
-  translation -0.61 1.06 2.05
+  translation -0.43 1.0625 0.0825
   children [
     Shape {
       appearance Appearance {
@@ -187,7 +185,7 @@ DEF WALL1 Solid {
         }
       }
       geometry Box {
-        size 0.75 0.15 0.015
+        size 0.74 0.15 0.015
       }
     }
   ]
@@ -198,7 +196,7 @@ DEF WALL1 Solid {
   }
 }
 DEF LEG4 Solid {
-  translation -0.18 0.5 2.71
+  translation 0 0.5 0.75
   scale 2 2 2
   children [
     Shape {
@@ -214,7 +212,7 @@ DEF LEG4 Solid {
   ]
 }
 DEF LEG3 Solid {
-  translation -0.18 0.5 1.22
+  translation 0 0.5 -0.75
   scale 2 2 2
   children [
     Shape {
@@ -230,7 +228,7 @@ DEF LEG3 Solid {
   ]
 }
 DEF LEG2 Solid {
-  translation 0.48 0.5 1.97
+  translation 0.75 0.5 0
   scale 2 2 2
   children [
     Shape {
@@ -246,7 +244,7 @@ DEF LEG2 Solid {
   ]
 }
 DEF LEG1 Solid {
-  translation -0.84 0.5 1.97
+  translation -0.75 0.5 0
   scale 2 2 2
   children [
     Shape {
@@ -262,7 +260,6 @@ DEF LEG1 Solid {
   ]
 }
 DEF FLOOR Solid {
-  translation -0.11611609 0.01 2.0029347
   children [
     Shape {
       appearance Appearance {

@@ -4,14 +4,16 @@
 import numpy as np
 import GeneticAlgorithm as ga
 
-class Neural_Network(object):
+class NeuralNetwork(object):
     def __init__(self):
-        self.inputLayerSize = 13
+        self.inputLayerSize = 8
         self.outputLayerSize = 2
         self.hiddenLayerSize = 15
 
         self.W1 = np.random.randn(self.inputLayerSize,self.hiddenLayerSize)
         self.W2 = np.random.randn(self.hiddenLayerSize,self.outputLayerSize)
+
+        self.weightNum = self.W1.size +  self.W2.size
 
     def run(self, x):
         z2 = np.dot(x, self.W1)
