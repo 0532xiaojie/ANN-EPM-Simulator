@@ -13,6 +13,7 @@ def positionEPuck():
 	print "positioning"
 	
 	
+	
 
 def calcFitness():
 	print "calculating fitness"
@@ -46,9 +47,7 @@ def fitness(weights):
 	#While (true) loop
 	while (dw.step(timestep)!=-1):
 		for i in range(sensorNum):
-    			print sensors[i].getValue()
 			sensorValue[i] = sensors[i].getValue()
-			
 		
 		speed = NN.run(np.array(sensorValue))
 		
@@ -59,9 +58,18 @@ def fitness(weights):
 		if(timePassed >= 300.000):
     			#calculate fitness
     			fitness = calcFitness()
-    			break;
+    			break
     		
     		#Check if any collisions have occured
+    		#when sensor value > 1000 then wall?
+    		wallBool = 0
+    		for i in range(sensorNum):
+    			if(sensorValue[i] > 1000):
+    				wallBool=1
+    		
+    		if(wallBool == 1):
+    			fitness = calcFitness()
+    			break
     		
     		#Check if on the open arm
 				
