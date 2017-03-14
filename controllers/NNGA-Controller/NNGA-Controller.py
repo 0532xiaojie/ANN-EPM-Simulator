@@ -7,6 +7,7 @@ import numpy as np
 import time
 
 sensorNum = 8
+initialPos = {0.7,1.01,0}
 
 def positionEPuck():
 	print "positioning"
@@ -45,6 +46,7 @@ def fitness(weights):
 	#While (true) loop
 	while (dw.step(timestep)!=-1):
 		for i in range(sensorNum):
+    			print sensors[i].getValue()
 			sensorValue[i] = sensors[i].getValue()
 			
 		
