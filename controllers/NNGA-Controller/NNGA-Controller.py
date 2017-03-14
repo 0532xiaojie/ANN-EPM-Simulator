@@ -17,6 +17,8 @@ def fitness(weights):
 	sensors = []
 	sensorValue = []
 	fitness=0
+	
+	#need to find a way to make sure robot is in correct pos
 
 	print "Fitness"
 
@@ -35,21 +37,24 @@ def fitness(weights):
 	while (dw.step(timestep)!=-1):
 		for i in range(sensorNum):
 			sensorValue[i] = sensors[i].getValue()
+			
+		
+		speed = NN.run(np.array(sensorValue))
+		
 		
 		#Check Timer
 		print dw.getTime()
 		if(dw.getTime() > 300.000):
     			#calculate fitness
     			fitness = calcFitness()
-    			
-    			#reset the epuck
-    			
     			break;
-		
+    		
+    		#Check if any collisions have occured
+    		
+    		#Check if on the open arm
+				
 
-		speed = NN.run(np.array(sensorValue))
-
-		dw.setSpeed(speed[0]*100, speed[1]*100)
+		dw.setSpeed(speed[0]*500, speed[1]*500)
 		
 		
 
