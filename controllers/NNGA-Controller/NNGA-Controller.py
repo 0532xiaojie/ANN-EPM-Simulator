@@ -4,8 +4,14 @@ from Genotype import Genotype
 
 from controller import *
 import numpy as np
+import time
 
 sensorNum = 8
+
+def positionEPuck():
+	print "positioning"
+	
+	
 
 def calcFitness():
 	print "calculating fitness"
@@ -14,9 +20,12 @@ def calcFitness():
 
 def fitness(weights):
 
+	positionEPuck()
+
 	sensors = []
 	sensorValue = []
 	fitness=0
+	startTime = time.time()
 	
 	#need to find a way to make sure robot is in correct pos
 
@@ -43,8 +52,9 @@ def fitness(weights):
 		
 		
 		#Check Timer
-		print dw.getTime()
-		if(dw.getTime() > 300.000):
+		timePassed = time.time() - startTime
+		
+		if(timePassed >= 300.000):
     			#calculate fitness
     			fitness = calcFitness()
     			break;
