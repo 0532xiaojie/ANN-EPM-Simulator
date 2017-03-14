@@ -25,7 +25,7 @@ def fitness(weights):
 	dw.enableEncoders(timestep)
 
 	NN.setWeights(weights)
-	
+
 	#Use manual timing?
 	#Start timer
 
@@ -38,6 +38,7 @@ def fitness(weights):
 			sensorValue[i] = sensors[i].getValue()
 
 		speed = NN.run(np.array(sensorValue))
+		speed * 1000
 
 		dw.setSpeed(speed[0], speed[1])
 
