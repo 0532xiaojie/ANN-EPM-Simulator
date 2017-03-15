@@ -76,7 +76,7 @@ class GA:
 
     def Evolve(self, pop):
         newpop = []
-        bestIndex = np.argsort(self.PopFitness(pop), axis=0)
+        bestIndex = np.argsort(self.PopFitness(pop), axis=0)[::-1]
         popbest = pop[bestIndex[0]]
         if self.elitism:
             newpop.append(np.array(popbest))
@@ -95,7 +95,7 @@ class GA:
             print genNum
             pop = self.Evolve(pop)
             fvalues = self.PopFitness(pop)
-            idx = np.argsort(fvalues, axis=0)
+            idx = np.argsort(fvalues, axis=0)[::-1]
             if fbest < fvalues[idx[0]]:
                 fbest = fvalues[idx[0]]
                 bestChromosome = pop[idx[0]]

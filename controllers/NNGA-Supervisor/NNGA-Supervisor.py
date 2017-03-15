@@ -16,7 +16,7 @@ def fitnessCalc():
     fitness = 0
     current_pos = rpostion.getSFVec3f()
     if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
-        fitness -= 1
+        fitness -= 3
     return fitness
 
 def resetPos():
