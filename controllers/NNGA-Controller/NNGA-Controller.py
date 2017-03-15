@@ -7,9 +7,12 @@ import numpy as np
 
 sensorNum = 8
 
-def calcFitness():
+def calcFitness(sensors):
 	print "calculating fitness"
-	return 0
+	for sensor in sensors:
+		if sensor > 1:
+			return 0
+	return 1
 
 
 def fitness(weights):
@@ -30,35 +33,24 @@ def fitness(weights):
 	dw.enableEncoders(timestep)
 
 	NN.setWeights(weights)
-<<<<<<< HEAD
 
-	#Use manual timing?
-	#Start timer
-=======
->>>>>>> tanya_branch
+	#reset the epuck
 
-	#While (true) loop
+	startTime = dw.getTime()
 	while (dw.step(timestep)!=-1):
 		for i in range(sensorNum):
 			sensorValue[i] = sensors[i].getValue()
-		
-		#Check Timer
-		print dw.getTime()
-		if(dw.getTime() > 300.000):
-    			#calculate fitness
-    			fitness = calcFitness()
-    			
-    			#reset the epuck
-    			
-    			break;
-		
+
+		currentTime = dw.getTime() - startTime
+		print currentTime
+
+		if(currentTime > 30.000):
+			#Timeout
+			fitness += calcFitness(sensorValue)
+			break;
 
 		speed = NN.run(np.array(sensorValue))
-		speed * 1000
-
-		dw.setSpeed(speed[0]*100, speed[1]*100)
-		
-		
+		dw.setSpeed(speed[0]*1000, speed[1]*1000)
 
 	print "Finished That Round"
 	return fitness
