@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-import GeneticAlgorithm as ga
 
 class NeuralNetwork(object):
     def __init__(self):

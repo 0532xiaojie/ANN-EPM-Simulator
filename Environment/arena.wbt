@@ -2,10 +2,18 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.01163565 -0.78702746 -0.61680823 3.1013764
-  position 0.39712794 2.29078 -0.098139103
+  orientation -0.062320824 -0.87100232 -0.48731004 2.9063958
+  position 0.032563618 2.1938346 -0.79959895
 }
-E-puck {
+Supervisor {
+  children [
+    Emitter {
+      channel 1
+    }
+  ]
+  controller "NNGA-Supervisor"
+}
+DEF Robot E-puck {
   translation 0.7 1.01 0
   rotation 0 1 0 1.5707963
   controller "NNGA-Controller"
