@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.062320824 -0.87100232 -0.48731004 2.9063958
-  position 0.032563618 2.1938346 -0.79959895
+  orientation -0.23427344 -0.80723059 -0.54175154 2.4578815
+  position -0.9163946 3.7078782 -0.80708686
 }
 Supervisor {
   children [
@@ -17,6 +17,12 @@ DEF Robot E-puck {
   translation 0.7 1.01 0
   rotation 0 1 0 1.5707963
   controller "NNGA-Controller"
+  turretSlot [
+    DEF touch_sensor TouchSensor {
+      name "touch_sensor"
+    }
+  ]
+  kinematic TRUE
 }
 DirectionalLight {
   ambientIntensity 1

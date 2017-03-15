@@ -7,5 +7,5 @@ class Genotype:
 	def generate(self):
 		chromosome = []
 		for i in range(self.size):
-			chromosome.append(random.random())
+			chromosome.append(random.uniform(-1, 1))
 		return chromosome
