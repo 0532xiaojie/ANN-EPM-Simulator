@@ -6,7 +6,7 @@ minimizedPerspectives: 000000ff00000000fd00000003000000000000000000000000fc01000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/NNGA-Controller/NNGA-Controller.py" "controllers/NNGA-Supervisor/NNGA-Supervisor.py"
+textFiles: 0 "controllers/NNGA-Supervisor/NNGA-Supervisor.py"
 documentationBook: 
 documentationPage: 
 renderingDevicePerspectives: 235;1;1;0;0

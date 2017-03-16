@@ -42,15 +42,24 @@ def checkMap(numMap):
     j = 0
     if current_pos[2] > 0:
         j = 1
+    if i < 0 or i > 33 or j < 0 or j > 1:
+        return numMap
     numMap[i][j] += 1
     return numMap
 
+def minMap(numMap):
+    minVal = np.inf
+    for i in range(33):
+        for j in range(2):
+            val = numMap[i][j]
+            if val < minVal:
+                minVal = val
+    return minVal
+
 def fitnessFun(weights):
     numMap = []
-    prevMap = []
     for i in range(33):
         numMap.append([0,0])
-        prevMap.append([0,0])
     fitness = 0
 
     weightsJSON = json.dumps(weights.tolist())
@@ -61,26 +70,23 @@ def fitnessFun(weights):
     startTime = sup.getTime()
     currentTime = 0.000
     while sup.step(timestep) != -1:
-        if currentTime > 30.000:
+        if currentTime > 300.000:
             break
         if breakCondition():
             return 0
+        if minMap(numMap) > 0:
+            return 10000 + (3000 - currentTime)
         currentTime = sup.getTime() - startTime
-        checkMap(numMap)
+        numMap = checkMap(numMap)
         fitness += fitnessCalc()
 
-    minMap = np.inf
     count  = 0
     for i in range(33):
         for j in range(2):
             val = numMap[i][j]
-            if val < minMap:
-                minMap = val
             if val > 0:
                 count += 1
-            #fitness += numMap[i][j]
     fitness += (count * 15)
-    fitness += (minMap * 1000)
 
     print "Fitness: ",
     print fitness
@@ -90,9 +96,12 @@ def fitnessFun(weights):
 def main():
     #ts = sup.getFromDef("touch_sensor")
     #ts.enable(timestep)
-    GA.Run()
-    while sup.step(timestep) != -1:
-        pass
+    #sensor1 = robot.getDeviceByIndex(0)
+    weights =  GA.Run()
+    print "Best Weights: ",
+    print weights
+    #while sup.step(timestep) != -1:
+        #pass
 
 GA = GA(Genotype(weightNum), fitnessFun)
 sup = Supervisor()

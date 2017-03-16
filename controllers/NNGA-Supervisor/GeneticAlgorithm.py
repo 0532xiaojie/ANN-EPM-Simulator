@@ -13,11 +13,13 @@ class GA:
                 generations=30,
                 population_size=20,
                 mutate_chance=0.50,
+                tournamentSize=4,
                 elitism=True):
         self.elitism = elitism
         self.generations = generations
         self.population_size = population_size
         self.mutate_chance = mutate_chance
+        self.tournamentSize = tournamentSize
         self.genotype = genotype
         self.function = function
 
@@ -59,15 +61,13 @@ class GA:
         return result
 
     def TournamentSelection(self, pop, bestIndex):
-        parents = np.random.choice(self.population_size,4)
-        if bestIndex.index(parents[0]) < bestIndex.index(parents[1]):
-            parent1 = pop[parents[0]]
-        else:
-            parent1 = pop[parents[1]]
-        if bestIndex.index(parents[2]) < bestIndex.index(parents[3]):
-            parent2 = pop[parents[2]]
-        else:
-            parent2 = pop[parents[3]]
+        parentList = []
+        parents = np.random.choice(self.population_size, self.tournamentSize)
+        for i in range(self.tournamentSize):
+            parentList.append(bestIndex.index(parents[i]))
+        parentList = np.argsort(np.array(parentList))
+        parent1 = pop[parents[parentList[0]]]
+        parent2 = pop[parents[parentList[1]]]
 
         child = self.Crossover(parent1,parent2)
         if random.random() > self.mutate_chance:
