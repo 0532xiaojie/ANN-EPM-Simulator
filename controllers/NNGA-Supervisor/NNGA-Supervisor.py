@@ -10,13 +10,21 @@ weightNum = 50
 
 def breakCondition():
     current_pos = rpostion.getSFVec3f()
-    return current_pos[1] < 1
+    return (current_pos[0] < -0.05 or current_pos[0] > 0.05) and (current_pos[2] < -0.15 or current_pos[2] > 0.15)
 
 def fitnessCalc():
     fitness = 0
     current_pos = rpostion.getSFVec3f()
+    """
     if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
-        fitness -= 3
+        fitness -= 5
+    """
+    if (current_pos[2] > 0.0363 or current_pos[2] < -0.0363):
+        fitness -= 1
+        if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
+            fitness -= 5
+    elif (current_pos[0] > 0.763 or current_pos[2] < -0.763):
+        fitness -= 1
     return fitness
 
 def resetPos():
@@ -38,18 +46,18 @@ def checkMap(numMap):
     if current_pos[1] < 1:
         return numMap
     i = 0
-    i = (int)(math.floor(current_pos[0] / 0.05) + 16)
+    i = (int)(math.floor(current_pos[0] / 0.05) + 15)
     j = 0
     if current_pos[2] > 0:
         j = 1
-    if i < 0 or i > 33 or j < 0 or j > 1:
+    if i < 0 or i > 31 or j < 0 or j > 1:
         return numMap
     numMap[i][j] += 1
     return numMap
 
 def minMap(numMap):
     minVal = np.inf
-    for i in range(33):
+    for i in range(31):
         for j in range(2):
             val = numMap[i][j]
             if val < minVal:
@@ -58,7 +66,7 @@ def minMap(numMap):
 
 def fitnessFun(weights):
     numMap = []
-    for i in range(33):
+    for i in range(31):
         numMap.append([0,0])
     fitness = 0
 
@@ -73,20 +81,26 @@ def fitnessFun(weights):
         if currentTime > 300.000:
             break
         if breakCondition():
-            return 0
+            print "Fitness: ",
+            print fitness
+            return -10000
         if minMap(numMap) > 0:
-            return 10000 + (3000 - currentTime)
+            print "Fitness: ",
+            print fitness
+            #return 10000 + (30000 - currentTime)
+            return 100000 + (300000 - currentTime)
         currentTime = sup.getTime() - startTime
         numMap = checkMap(numMap)
         fitness += fitnessCalc()
 
     count  = 0
-    for i in range(33):
+    for i in range(31):
         for j in range(2):
             val = numMap[i][j]
             if val > 0:
                 count += 1
-    fitness += (count * 15)
+    #fitness += (count * 15)
+    fitness += (count * 1000)
 
     print "Fitness: ",
     print fitness
