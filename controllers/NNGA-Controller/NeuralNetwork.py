@@ -27,11 +27,6 @@ class NeuralNetwork(object):
     def tanH(self, z):
         return (2/(1 + np.exp(-2 * z))) - 1
 
-    def costFunction(self, x, y):
-        yPrime = self.run(x)
-        cost = 0.5*sum((y-yPrime)**2)
-        return cost
-
     def setWeights(self, weights):
         index = 0
 
@@ -58,9 +53,3 @@ class NeuralNetwork(object):
                 self.W2 = np.append([self.W2], [arrayList[i]], axis = 0)
             else:
                 self.W2 = np.append(self.W2, [arrayList[i]], axis = 0)
-
-    def weightAmount(self):
-        amount = 0
-        amount = amount + (len(self.W1) * len(self.W1[0]))
-        amount = amount + (len(self.W2) * len(self.W2[0]))
-        return amount

@@ -11,8 +11,8 @@ class GA:
                 genotype,
                 function,
                 generations=30,
-                population_size=20,
-                mutate_chance=0.50,
+                population_size=50,
+                mutate_chance=0.25,
                 tournamentSize=4,
                 elitism=True):
         self.elitism = elitism
@@ -45,10 +45,7 @@ class GA:
     def Mutate(self, chromosome):
         for num in range(random.randint(1,self.genotype.size)):
             index = random.randint(0,self.genotype.size-1)
-            if random.random() >= 0.5:
-                chromosome[index] = chromosome[index] * 1.25
-            else:
-                chromosome[index] = chromosome[index] * 0.75
+            chromosome[index] = chromosome[index] + random.uniform(-0.5,0.5)
         return chromosome
 
     def Crossover(self, chromosome1, chromosome2):

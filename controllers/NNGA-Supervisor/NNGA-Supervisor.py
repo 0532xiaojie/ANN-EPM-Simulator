@@ -15,7 +15,6 @@ def breakCondition():
 def fitnessCalc():
     fitness = 0
     current_pos = rpostion.getSFVec3f()
-    """
     if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
         fitness -= 5
     """
@@ -25,6 +24,7 @@ def fitnessCalc():
             fitness -= 5
     elif (current_pos[0] > 0.763 or current_pos[2] < -0.763):
         fitness -= 1
+    """
     return fitness
 
 def resetPos():
@@ -78,18 +78,21 @@ def fitnessFun(weights):
     startTime = sup.getTime()
     currentTime = 0.000
     while sup.step(timestep) != -1:
+        currentTime = sup.getTime() - startTime
         if currentTime > 300.000:
             break
         if breakCondition():
+            fitness = -10000
             print "Fitness: ",
             print fitness
-            return -10000
+            return fitness
         if minMap(numMap) > 0:
+            fitness = 10000 + (3000 - currentTime)
+            #fitness = 100000 + (30000 - currentTime)
             print "Fitness: ",
-            print fitness
-            #return 10000 + (30000 - currentTime)
-            return 100000 + (300000 - currentTime)
-        currentTime = sup.getTime() - startTime
+            print fitness,
+            print "    Completed Maze"
+            return fitness
         numMap = checkMap(numMap)
         fitness += fitnessCalc()
 
@@ -99,8 +102,8 @@ def fitnessFun(weights):
             val = numMap[i][j]
             if val > 0:
                 count += 1
-    #fitness += (count * 15)
-    fitness += (count * 1000)
+    fitness += (count * 15)
+    #fitness += (count * 1000)
 
     print "Fitness: ",
     print fitness
@@ -112,6 +115,9 @@ def main():
     #ts.enable(timestep)
     #sensor1 = robot.getDeviceByIndex(0)
     weights =  GA.Run()
+    resetPos()
+    weightsJSON = json.dumps(weights.tolist())
+    emitter.send(weightsJSON)
     print "Best Weights: ",
     print weights
     #while sup.step(timestep) != -1:
