@@ -82,21 +82,17 @@ class GA:
         return newpop
 
     def NewGeneration(self, pop):
-        #fbest = np.inf
         genNum = 0
-        fbest = 0
-        bestChromosome = pop[0]
         for gen in range(self.generations):
             genNum += 1
             print "Generation: ",
             print genNum
             pop = self.Evolve(pop)
-            fvalues = self.PopFitness(pop)
-            idx = np.argsort(fvalues, axis=0)[::-1]
-            if fbest < fvalues[idx[0]]:
-                fbest = fvalues[idx[0]]
-                bestChromosome = pop[idx[0]]
-        return bestChromosome
+        fvalues = self.PopFitness(pop)
+        idx = np.argsort(fvalues, axis=0)[::-1]
+        print "Best Chromosome:"
+        self.function(pop[idx[0]])
+        return pop[idx[0]]
 
     def Run(self):
         pop = self.InitialGeneration()

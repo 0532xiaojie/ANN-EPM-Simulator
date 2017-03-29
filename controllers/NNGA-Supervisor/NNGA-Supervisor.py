@@ -15,10 +15,6 @@ def breakCondition():
 def fitnessCalc():
     fitness = 0
     current_pos = rpostion.getSFVec3f()
-    """
-    if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
-        fitness -= 5
-    """
     if (current_pos[2] > 0.0363 or current_pos[2] < -0.0363):
         fitness -= 4
         if (current_pos[2] > 0.1 or current_pos[2] < -0.1):
@@ -92,7 +88,9 @@ def fitnessFun(weights):
             fitness += 20000 + (30000 - currentTime)
             print "Fitness: ",
             print fitness,
-            print "    Completed Maze"
+            print "    Completed Maze in ",
+            print currentTime,
+            print " seconds"
             return fitness
         numMap = checkMap(numMap)
         fitness += fitnessCalc()
